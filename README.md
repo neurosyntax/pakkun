@@ -65,10 +65,10 @@ output:
 			{
 				"id" : NumberLong("2298940924"),
 					"name" : "test7",
-					"header" : "public static double test7(int i, int j, int k)",
+					"header" : "public static double testG(int i, int j, int k)",
 					"intype" : [ "int", "int", "int" ],
 					"outtype" : [ "double" ],
-					"source" : "public static double test7(int i, int j, int k) {}"
+					"source" : "public static double testG(int i, int j, int k) {}"
 			}
 		]
 }
@@ -81,10 +81,10 @@ output:
 			{
 				"id" : NumberLong("3700423157"),
 				"name" : "test3",
-				"header" : "public static float test3(int i, double d, float f)",
+				"header" : "public static float testC(int i, double d, float f)",
 				"intype" : [ "float", "int", "double" ],
 				"outtype" : [ "float" ],
-				"source" : "public static float test3(int i, double d, float f) {}"
+				"source" : "public static float testC(int i, double d, float f) {}"
 			}
 		]
 }
