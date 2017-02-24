@@ -51,4 +51,31 @@ go install
 go run main.go -dir <absolute path>
 ```
 
+#### Test:
+By default the script looks for functions containing numeric/boolean input parameters and outputs*.
+You should only get back test3 since that's the only one with only numeric or boolean values.
+```
+go run main.go -dir ~/pakkun
+
+output:
+{
+	"_id" : 1170655353,
+	"name" : "helloworld.java",
+	"path" : "/home/ubuntu/research/sandbox/go_workspace/pakkun/test/helloworld.java",
+	"funcs" : 
+		[
+			{
+				"id" : NumberLong("3700423157"),
+				"name" : "test3",
+				"header" : "public static float test3(int i, double d, float f)",
+				"intype" : [ "float", "int", "double" ],
+				"outtype" : [ "float" ],
+				"source" : "public static float test3(int i, double d, float f) {}"
+			}
+		]
+}
+```
+
+*  Java functions headers should only specify one return type. However, languages like Golang allow for specifying multiple return types. So allowing for multiple types will be useful for extending this to languages like Go, but it also requires assuming the programs are syntactically correct.
+
 
