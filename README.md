@@ -51,17 +51,33 @@ go run main.go -dir <absolute path>
 
 #### Test:
 By default the script looks for functions containing numeric/boolean input parameters and outputs*.
-You should only get back test3() since that's the only one with only numeric or boolean values.
+You should only get back test3() and test7() since that's the only one with only numeric or boolean values.
 ```
 go run main.go -dir ~/pakkun
 
 output:
 {
+	"_id" : 911846790,
+	"name" : "foobar.java",
+	"path" : "/home/ubuntu/research/sandbox/go_workspace/pakkun/test/foobar.java",
+	"funcs" : 
+		[
+			{
+				"id" : NumberLong("2298940924"),
+					"name" : "test7",
+					"header" : "public static double test7(int i, int j, int k)",
+					"intype" : [ "int", "int", "int" ],
+					"outtype" : [ "double" ],
+					"source" : "public static double test7(int i, int j, int k) {}"
+			}
+		]
+}
+{
 	"_id" : 1170655353,
 	"name" : "helloworld.java",
 	"path" : "/home/ubuntu/research/sandbox/go_workspace/pakkun/test/helloworld.java",
 	"funcs" : 
-		[
+		[ 
 			{
 				"id" : NumberLong("3700423157"),
 				"name" : "test3",
