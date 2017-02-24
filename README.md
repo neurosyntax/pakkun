@@ -76,6 +76,6 @@ output:
 }
 ```
 
-*  Java functions headers should only specify one return type. However, languages like Golang allow for specifying multiple return types. So allowing for multiple types will be useful for extending this to languages like Go, but it also requires assuming the programs are syntactically correct.
+*  *Java functions headers should only specify one return type. However, languages like Golang allow for specifying multiple return types. So allowing for multiple types will be useful for extending this to languages like Go, but it also requires assuming the programs are syntactically correct.
 
 
