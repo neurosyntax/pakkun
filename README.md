@@ -1,7 +1,5 @@
-# Pakkun
+# Pakkun[Go gopher](./images/gopherbelly50.jpg)
 ### Essentially a refactored github-scraper. Currently, does not have the GitHub API features, but will add these soon. That repo really needed refactoring...
-
-# Pakkun![Go gopher](./images/gopherbelly50.jpg)
 
 Language: Go (Golang)
 
@@ -53,7 +51,7 @@ go run main.go -dir <absolute path>
 
 #### Test:
 By default the script looks for functions containing numeric/boolean input parameters and outputs*.
-You should only get back test3 since that's the only one with only numeric or boolean values.
+You should only get back test3() since that's the only one with only numeric or boolean values.
 ```
 go run main.go -dir ~/pakkun
 
