@@ -1,5 +1,5 @@
 # Pakkun
-### Essentially a refactored github-scraper. Currently, does not have the GitHub API features, but will add these soon. That repo really need refactoring...
+### Essentially a refactored github-scraper. Currently, does not have the GitHub API features, but will add these soon. That repo really needed refactoring...
 
 # Pakkun![Go gopher](./images/gopherbelly50.jpg)
 
