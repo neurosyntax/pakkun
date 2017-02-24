@@ -1,9 +1,9 @@
 public class FooBar {
-	public static boolean int test6() {
+	public static boolean int testF() {
 
 	}
 
-	public static double test7(int i, int j, int k) {
+	public static double testG(int i, int j, int k) {
 	
 	}
 }
