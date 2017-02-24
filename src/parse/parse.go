@@ -323,5 +323,5 @@ func balance(arr []byte, m int) string {
     }
 
     // Ignore the left half (original) part of the slice and return the new string without newlines and tabs
-    return strings.Replace(strings.Replace(string(arr[start:m+1]), "\n", "", -1), "\t", "", -1)
+    return strings.Replace(strings.Replace(strings.Replace(string(arr[start:m+1]), "\n", "", -1), "\t", "", -1), "\"", "\\\"", -1)
 }
