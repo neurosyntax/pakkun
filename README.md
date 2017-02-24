@@ -11,7 +11,7 @@ A tool for scraping repositories from GitHub and extracting source code function
 
 [Install MongoDB](https://golang.org/doc/install)
 
-[Install MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+[Install MongoDB on Ubuntu](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
 Install Exuberant Ctags:
 ```sh
