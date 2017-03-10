@@ -26,8 +26,6 @@ import (
 )
 
 func SearchAndSaveFunc(session *mgo.Session, searchDir string, extension string, funcTypes map[string]bool) {
-
-
     // var total int
     // Walk directory and parse java files as they're found
     filepath.Walk(searchDir, func(path string, f os.FileInfo, err error) error {

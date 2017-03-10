@@ -283,13 +283,14 @@ func extractFuncSrc(f *File) {
 
 /*
     Balance the curly braces
+    arr - byte array of file
+    m - index of 
 */
 func balance(arr []byte, m int) string {
     start := m
     count := 0
 
-    // Find all indicies with { = 123 (byte value) or } = 125 (byte value)
-    // Find first left curly brace
+    // Find index of first left curly brace { = 123 (byte value)
     for {
         if m < len(arr) {
             if arr[m] == 123 {
@@ -298,7 +299,7 @@ func balance(arr []byte, m int) string {
                 break
             }
         } else {
-            fmt.Printf("error: m:%d, len(arr): %d\n", m, len(arr))
+            fmt.Printf("error: m:%d, len(arr): %d\n%s\n", m, len(arr), string(arr))
             return ""
         }
 
