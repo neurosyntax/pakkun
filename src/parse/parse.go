@@ -299,7 +299,7 @@ func balance(arr []byte, m int) string {
                 break
             }
         } else {
-            c = []byte(fmt.Sprintf("error: m:%d, len(arr): %d%s\n", m, len(arr), string(content)))
+            c   := []byte(fmt.Sprintf("error: m:%d, len(arr): %d%s\n", m, len(arr), string(content)))
             err := ioutil.WriteFile("/tmp/dat1", c, 0644)
             check(err)
             return ""
