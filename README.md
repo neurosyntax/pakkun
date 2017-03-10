@@ -20,6 +20,12 @@ Install MongoDB driver for Go:
 ```sh
 go get gopkg.in/mgo.v2
 ```
+If you get the following:
+```
+package gopkg.in/mgo.v2: cannot download, $GOPATH not set. For more details see: go help gopath
+```
+Then remove the `gopkg.in/mgo.v2` directory and try the above command again.
+
 Refer to [mgo](https://github.com/go-mgo/mgo) for further and more up-to-date instructions.
 
 GOPATH setup
