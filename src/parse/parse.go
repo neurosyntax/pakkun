@@ -23,7 +23,6 @@ import (
     "sync"
     "os"
     "io/ioutil"
-    "reflect"
     "log"
     "fmt"
     "hash/fnv"
@@ -91,6 +90,11 @@ func getFuncTerm(ext string) string {
 func parseJavaFuncHeader(header string, funcTypes map[string]bool) (string, []string, []string, bool) {
     // Ignore single-line comments on function header line and remove trailing spaces
     header = strings.TrimSpace(strings.Split(header, "//")[0])
+
+    // 59 is byte value of ; meaning header is from abstract class and not an actual function header
+    if header[len(header)-1] == 59 {
+        return header, []string{}, []string{}, false
+    }
 
     // Left part contains visibility modifier, return type (can be composed of multiple keywords),
     //      and function name
@@ -242,43 +246,40 @@ func extractFuncSrc(f *File) {
     if _, err := os.Stat(f.Path); !os.IsNotExist(err) {
         var content []byte
         content, _ = ioutil.ReadFile(f.Path)
+        contentStr := string(content)
 
         // Convert each header to a byte array and find the offset in the source code byte array
         // and extract the function
         funcLen := len(f.Funcs)
         fi      := 0
-
+        
         for fi < funcLen {
-            go func(fi int) {
-                fn     := f.Funcs[fi]
-                header := []byte(fn.Header)
+            fn     := f.Funcs[fi]
+            header := []byte(fn.Header)
 
-                // Should never be true
-                if len(header) == 0 {
-                    fmt.Println(header)
-                    log.Fatal()
-                }
+            // Should never be true
+            if len(header) == 0 {
+                fmt.Println(header)
+                log.Fatal()
+            }
 
-                var ch   = header[0]
-                var hlen = len(header)
-
-                // Search at position starting with the first byte from the function header
-                for i, b := range content {
-                    /*
-                        ch == b finds an appropriate point to compare, else it short circuits
-                        reflect.DeepEqual compares the contents of the arrays and returns 
-                            true if all the elements are equal position-for-position
-                        If this is true, extract the function source and then stop searching
-                    */
-                    if ch == b && reflect.DeepEqual(header, content[i:(i+hlen)]) {
-                        f.Funcs[fi].Source = balance(content, i)
-                        break
-                    }
-                }
-            }(fi)
+            src := balance(content, strings.Index(contentStr, fn.Header))
+            if len(src) > 0 {
+                f.Funcs[fi].Source = src
+            } else {
+                // If function's curly braces are unbalanced, delete this entry
+                f.Funcs = append(f.Funcs[:fi], f.Funcs[fi+1:]...)
+            }
             fi++
         }
     }
+}
+
+func insert(slice []byte, index int, item byte) []byte {
+    slice = slice[0:len(slice)+1]
+    copy(slice[index+1:], slice[index:])
+    slice[index] = item
+    return slice
 }
 
 /*
@@ -313,6 +314,10 @@ func balance(arr []byte, m int) string {
     // Match left and right curly braces
     // count should equal zero when it reaches the end of the function.
     for {
+        if m >= len(arr) {
+            break
+        }
+
         if arr[m] == 123 {
             count++
         }
@@ -327,6 +332,12 @@ func balance(arr []byte, m int) string {
         m++
     }
 
+    // If curly braces are unbalanced, return an empty string
+    // Cannot naively append or insert curly braces because most likely would not be syntactically correct.
+    if count != 0 {
+        return ""
+    }
+
     // Ignore the left half (original) part of the slice and return the new string without newlines and tabs
-    return strings.Replace(strings.Replace(strings.Replace(string(arr[start:m+1]), "\n", "", -1), "\t", "", -1), "\"", "\\\"", -1)
+    return strings.Replace(strings.Replace(string(arr[start:m+1]), "\n", "", -1), "\t", "", -1)
 }
